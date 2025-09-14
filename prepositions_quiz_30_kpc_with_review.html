@@ -1,0 +1,405 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kru Pai Classroom • Prepositions Quiz (Set 1) + Review</title>
+  <style>
+    :root{
+      --bg:#f7fafc; --card:#ffffff; --text:#0f172a; --muted:#64748b;
+      --accent:#7c3aed; --accent2:#3b82f6; --good:#16a34a; --bad:#ef4444;
+      --ring: rgba(124,58,237,.18);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family: ui-rounded, "Poppins","Kanit", system-ui; background:var(--bg); color:var(--text)}
+    .wrap{max-width:960px;margin:18px auto;padding:16px}
+    .card{background:var(--card);border-radius:24px;box-shadow:0 10px 30px rgba(2,6,23,.06);padding:20px}
+    h1{margin:0;font-size:clamp(22px,3.4vw,36px)}
+    .muted{color:var(--muted)}
+    .row{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{padding:12px 16px;border:none;border-radius:12px;font-weight:800;cursor:pointer}
+    .btn:active{transform:translateY(1px)}
+    .primary{background:linear-gradient(180deg,#8b5cf6,#7c3aed);color:#fff;box-shadow:0 10px 18px rgba(124,58,237,.25)}
+    .ghost{background:#eef2ff;color:#312e81}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef2ff;color:#3730a3;font-weight:800;font-size:12px}
+    .progress{height:12px;background:#e5e7eb;border-radius:999px;overflow:hidden}
+    .progress>span{display:block;height:100%;width:0%;background:linear-gradient(90deg,#3b82f6,#06b6d4);transition:width .35s ease}
+    .qtext{font-size:clamp(18px,3vw,24px);font-weight:900;margin:8px 0}
+    .olist{display:grid;gap:10px;margin-top:8px}
+    .opt{border:2px solid #e5e7eb;border-radius:14px;padding:12px 14px;cursor:pointer;font-weight:700}
+    .opt:hover{border-color:#c7d2fe}
+    .opt.correct{background:#ecfdf5;border-color:#10b981}
+    .opt.wrong{background:#fef2f2;border-color:#f87171}
+    .disabled{pointer-events:none;opacity:.7}
+    .hidden{display:none !important}
+    input[type="text"]{width:100%;font-size:18px;padding:12px 14px;border-radius:12px;border:2px solid #e5e7eb;outline:none}
+    input[type="text"]:focus{border-color:#8b5cf6;box-shadow:0 0 0 6px var(--ring)}
+    footer{margin-top:10px;color:var(--muted);font-size:12px;text-align:center}
+    table{width:100%;border-collapse:collapse;margin-top:10px}
+    th,td{border-bottom:1px solid #e5e7eb;padding:8px;text-align:left}
+    th{background:#f8fafc}
+
+    /* Brand bar */
+    .kpc-brandbar{
+      position:fixed; top:10px; left:10px; z-index:9999;
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 14px; border-radius:999px;
+      background:linear-gradient(90deg,#fb7185,#f59e0b);
+      color:#ffffff; font-weight:900; letter-spacing:.3px;
+      box-shadow:0 10px 20px rgba(0,0,0,.18);
+      user-select:none;
+    }
+    .kpc-brand-dot{
+      width:28px; height:28px; border-radius:999px;
+      background:#ffffff; color:#111827;
+      display:grid; place-items:center; font-weight:900; font-size:14px;
+      box-shadow:0 2px 8px rgba(0,0,0,.12);
+    }
+    @media (max-width:480px){
+      .kpc-brandbar{transform:scale(.92); transform-origin:top left;}
+    }
+  </style>
+</head>
+<body>
+<div class="kpc-brandbar"><div class="kpc-brand-dot">KP</div> Kru Pai Classroom</div>
+<div class="wrap">
+
+  <!-- START -->
+  <section id="start" class="card">
+    <h1>Prepositions Quiz — Set 1</h1>
+    <div class="muted">คำบุพบท • 30 ข้อ (A–D) — ระดับประถมปลาย</div>
+    <div class="card" style="margin-top:12px">
+      <b>วิธีเล่น (สั้น ๆ)</b>
+      <ol style="margin:8px 0 0 18px">
+        <li>กด <b>ทบทวนคำบุพบท</b> เพื่ออ่านสรุปแบบย่อยง่าย</li>
+        <li>ตอบแบบตัวเลือก <b>A–D</b> — เฉลยทันทีหลังเลือก</li>
+        <li>ครบ 30 ข้อ จะมีหน้า <b>สรุปคะแนน</b> พร้อมชื่อผู้เล่น</li>
+        <li>ถ้า <b>คนเดิม</b> เล่นหลายรอบ ระบบจะบันทึกคะแนนแต่ละรอบ (แสดงล่าสุด 3 รอบ)</li>
+      </ol>
+      <div class="muted" style="margin-top:6px">เกณฑ์ผ่าน: <b>80%</b> (ได้ ≥ 24 คะแนน)</div>
+    </div>
+
+    <div class="row" style="margin-top:14px">
+      <div style="flex:1 1 280px">
+        <label>ชื่อผู้เล่น</label>
+        <input id="playerName" type="text" placeholder="เช่น Nita / 1/5" />
+      </div>
+      <div style="align-self:end; display:flex; gap:8px">
+        <button id="btnReview" class="btn ghost">ทบทวนคำบุพบท 📘</button>
+        <button id="btnStart" class="btn primary">เริ่มทำข้อสอบ ▶</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- GAME -->
+  <section id="game" class="card hidden">
+    <div class="row" style="align-items:center;justify-content:space-between">
+      <div class="pill" id="topicPill">Prepositions</div>
+      <div class="row" style="align-items:center">
+        <div><b id="score">0</b> ✅</div>
+        <div>| <span id="done">0</span>/<span id="total">30</span></div>
+      </div>
+    </div>
+    <div class="progress" style="margin:8px 0 6px"><span id="bar"></span></div>
+
+    <div class="qtext" id="qtext">Question text</div>
+    <div id="olist" class="olist"></div>
+
+    <div class="row" style="margin-top:10px">
+      <button id="btnNext" class="btn ghost hidden">ข้อถัดไป ▶</button>
+    </div>
+
+    <footer id="footerGame"></footer>
+  </section>
+
+  <!-- REVIEW -->
+  <section id="review" class="card hidden">
+    <h2>ทบทวนคำบุพบท (Prepositions Review)</h2>
+    <p class="muted">แบ่งหมวดหมู่พร้อมตัวอย่างประโยค — อ่านจบแล้วกดกลับไปเริ่มทำข้อสอบได้เลย</p>
+
+    <div class="card" style="margin-top:12px">
+      <h3 style="margin:0 0 6px 0">🕒 เวลา (Time)</h3>
+      <table>
+        <thead><tr><th>คำบุพบท</th><th>การใช้</th><th>ตัวอย่างประโยค</th></tr></thead>
+        <tbody>
+          <tr><td><b>in</b></td><td>ช่วงเวลา: ตอนเช้า/บ่าย/เย็น, เดือน/ปี</td><td>I brush my teeth <b>in</b> the morning.</td></tr>
+          <tr><td><b>on</b></td><td>วัน/วันที่</td><td>We go to school <b>on</b> Monday.</td></tr>
+          <tr><td><b>at</b></td><td>เวลาเฉพาะเจาะจง</td><td>He sleeps <b>at</b> night.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <h3 style="margin:0 0 6px 0">📍 สถานที่ / ตำแหน่ง (Place & Position)</h3>
+      <table>
+        <thead><tr><th>คำบุพบท</th><th>ความหมาย</th><th>ตัวอย่างประโยค</th></tr></thead>
+        <tbody>
+          <tr><td><b>in</b></td><td>ใน</td><td>The toys are <b>in</b> the box.</td></tr>
+          <tr><td><b>on</b></td><td>บน</td><td>The book is <b>on</b> the table.</td></tr>
+          <tr><td><b>at</b></td><td>ที่ (จุด/สถานที่)</td><td>She is waiting <b>at</b> the bus stop.</td></tr>
+          <tr><td><b>under</b></td><td>ใต้</td><td>The cat is <b>under</b> the bed.</td></tr>
+          <tr><td><b>between</b></td><td>ระหว่าง (2 สิ่ง)</td><td>He sat <b>between</b> two chairs.</td></tr>
+          <tr><td><b>behind</b></td><td>ด้านหลัง</td><td>The garden is <b>behind</b> the house.</td></tr>
+          <tr><td><b>in front of</b></td><td>ด้านหน้า</td><td>There is a flag <b>in front of</b> the school.</td></tr>
+          <tr><td><b>next to</b></td><td>ถัดจาก/ข้าง ๆ</td><td>My house is <b>next to</b> the park.</td></tr>
+          <tr><td><b>above / over</b></td><td>เหนือ/อยู่ข้างบน</td><td>A plane is flying <b>over</b> the city.</td></tr>
+          <tr><td><b>below / under</b></td><td>ต่ำกว่า/ใต้</td><td>The shoes are <b>under</b> the bed.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <h3 style="margin:0 0 6px 0">➡️ การเคลื่อนที่ (Movement)</h3>
+      <table>
+        <thead><tr><th>คำบุพบท</th><th>การใช้</th><th>ตัวอย่างประโยค</th></tr></thead>
+        <tbody>
+          <tr><td><b>into</b></td><td>เข้า “ไปข้างใน”</td><td>She walked <b>into</b> the room.</td></tr>
+          <tr><td><b>onto</b></td><td>ขึ้น “ไปบน” พื้นผิว</td><td>The cat jumped <b>onto</b> the bed.</td></tr>
+          <tr><td><b>across</b></td><td>ข้าม “จากด้านหนึ่งไปอีกด้าน”</td><td>They ran <b>across</b> the road.</td></tr>
+          <tr><td><b>through</b></td><td>ผ่าน “ภายใน” สิ่งใดสิ่งหนึ่ง</td><td>We walked <b>through</b> the forest.</td></tr>
+          <tr><td><b>down</b></td><td>ลง/ไปตาม</td><td>He walked <b>down</b> the stairs.</td></tr>
+          <tr><td><b>out of</b></td><td>ออกจาก</td><td>She got <b>out of</b> the car.</td></tr>
+          <tr><td><b>over</b></td><td>ข้าม “อยู่เหนือ”</td><td>The plane flew <b>over</b> the bridge.</td></tr>
+          <tr><td><b>by</b></td><td>โดย/ด้วยวิธี (การเดินทาง)</td><td>We go to school <b>by</b> bus.</td></tr>
+          <tr><td><b>on (foot)</b></td><td>เดินเท้า</td><td>I go to school <b>on</b> foot.</td></tr>
+          <tr><td><b>with</b></td><td>กับ/พร้อมด้วย</td><td>Come <b>with</b> me to the library.</td></tr>
+          <tr><td><b>to / from</b></td><td>ไปยัง / มาจาก</td><td>This letter is <b>from</b> my friend <b>to</b> me.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row" style="margin-top:12px">
+      <button id="btnBackToStart" class="btn ghost">⬅ กลับไปเริ่มทำข้อสอบ</button>
+      <button id="btnStartFromReview" class="btn primary">เริ่มทำข้อสอบ ▶</button>
+    </div>
+  </section>
+
+  <!-- SUMMARY -->
+  <section id="summary" class="card hidden">
+    <h2>สรุปคะแนน</h2>
+    <div class="muted" id="playerLine">ผู้เล่น: -</div>
+    <div style="margin-top:8px">
+      ได้คะแนน: <b id="finalScore">0</b>/<b id="finalTotal">30</b> — <span id="passStatus" class="pill">-</span>
+    </div>
+    <div class="muted" style="margin-top:6px">เกณฑ์ผ่าน: 24/30 (80%)</div>
+
+    <div class="card" style="margin-top:12px">
+      <b>สถิติ <span id="statName"></span> (ล่าสุดสูงสุด 3 รอบ)</b>
+      <table id="historyTable">
+        <thead><tr><th>รอบ</th><th>วันที่</th><th>เวลา</th><th>คะแนน</th><th>ผล</th></tr></thead>
+        <tbody id="historyBody"><tr><td colspan="5" class="muted">ยังไม่มีข้อมูล</td></tr></tbody>
+      </table>
+      <div id="attemptSummary" class="muted" style="margin-top:6px"></div>
+    </div>
+
+    <div class="row" style="margin-top:12px">
+      <button id="btnPlayAgain" class="btn primary">เริ่มรอบใหม่ ▶</button>
+      <button id="btnBackStart" class="btn ghost">กลับหน้าแรก</button>
+    </div>
+  </section>
+
+  <footer>© Kru Pai Classroom</footer>
+</div>
+
+<script>
+// ====== REVIEW HANDLERS ======
+function showReview(){
+  document.getElementById('start').classList.add('hidden');
+  document.getElementById('game').classList.add('hidden');
+  document.getElementById('summary').classList.add('hidden');
+  document.getElementById('review').classList.remove('hidden');
+}
+function backToStart(){
+  document.getElementById('review').classList.add('hidden');
+  document.getElementById('summary').classList.add('hidden');
+  document.getElementById('game').classList.add('hidden');
+  document.getElementById('start').classList.remove('hidden');
+}
+
+// ====== CONFIG ======
+const PASS_SCORE = 24; // 80% of 30
+const STORAGE_PREFIX = 'kpc_prepositions_set1_history_';
+const QUESTIONS = [
+  {topic:'Prepositions', q:'The cat is hiding ____ the table.', opts:['on', 'under', 'in', 'at'], ans:1},
+  {topic:'Prepositions', q:'There is a picture ____ the wall.', opts:['in', 'on', 'under', 'at'], ans:1},
+  {topic:'Prepositions', q:'We arrived ____ the airport early.', opts:['in', 'on', 'at', 'into'], ans:2},
+  {topic:'Prepositions', q:'The children are playing ____ the park.', opts:['in', 'at', 'on', 'by'], ans:0},
+  {topic:'Prepositions', q:'She put the keys ____ her bag.', opts:['at', 'in', 'on', 'under'], ans:1},
+  {topic:'Prepositions', q:'Dad waits ____ the bus stop every morning.', opts:['in', 'at', 'on', 'by'], ans:1},
+  {topic:'Prepositions', q:'There is a big tree ____ our house.', opts:['between', 'in front of', 'behind', 'among'], ans:2},
+  {topic:'Prepositions', q:'Please sit ____ me.', opts:['next to', 'between', 'behind', 'over'], ans:0},
+  {topic:'Prepositions', q:'The ball rolled ____ the table.', opts:['above', 'under', 'between', 'behind'], ans:1},
+  {topic:'Prepositions', q:'The bird is flying ____ the river.', opts:['over', 'between', 'into', 'behind'], ans:0},
+  {topic:'Prepositions', q:'Mom put the vase ____ the shelf.', opts:['on', 'in', 'under', 'at'], ans:0},
+  {topic:'Prepositions', q:'My school is ____ Bangkok.', opts:['in', 'at', 'on', 'into'], ans:0},
+  {topic:'Prepositions', q:'The sun is ____ the clouds today.', opts:['between', 'under', 'behind', 'next to'], ans:2},
+  {topic:'Prepositions', q:'We walked ____ the bridge to the other side.', opts:['across', 'through', 'into', 'onto'], ans:0},
+  {topic:'Prepositions', q:'The dog jumped ____ the lake.', opts:['onto', 'into', 'across', 'over'], ans:1},
+  {topic:'Prepositions', q:'He climbed ____ the roof carefully.', opts:['into', 'onto', 'to', 'over'], ans:1},
+  {topic:'Prepositions', q:'The train goes ____ the tunnel.', opts:['across', 'over', 'through', 'between'], ans:2},
+  {topic:'Prepositions', q:'The store is ____ the bank and the post office.', opts:['among', 'between', 'behind', 'in front of'], ans:1},
+  {topic:'Prepositions', q:'We usually have lunch ____ noon.', opts:['in', 'on', 'at', 'by'], ans:2},
+  {topic:'Prepositions', q:'She studies English ____ the morning.', opts:['in', 'on', 'at', 'by'], ans:0},
+  {topic:'Prepositions', q:'The party is ____ Friday evening.', opts:['in', 'on', 'at', 'by'], ans:1},
+  {topic:'Prepositions', q:'He came to school ____ bus.', opts:['by', 'with', 'on', 'in'], ans:0},
+  {topic:'Prepositions', q:'I go to school ____ foot.', opts:['by', 'on', 'with', 'at'], ans:1},
+  {topic:'Prepositions', q:'Can you come ____ me to the library?', opts:['with', 'by', 'to', 'from'], ans:0},
+  {topic:'Prepositions', q:'This gift is ____ my best friend.', opts:['to', 'for', 'from', 'with'], ans:1},
+  {topic:'Prepositions', q:'The letter is ____ my teacher.', opts:['to', 'for', 'from', 'with'], ans:2},
+  {topic:'Prepositions', q:'We will travel ____ Chiang Mai next week.', opts:['to', 'at', 'in', 'on'], ans:0},
+  {topic:'Prepositions', q:'Put your name ____ the top of the page.', opts:['in', 'at', 'on', 'under'], ans:2},
+  {topic:'Prepositions', q:'Don’t run ____ the classroom.', opts:['into', 'over', 'across', 'in'], ans:3},
+  {topic:'Prepositions', q:'The ball is ____ the two boxes.', opts:['among', 'between', 'behind', 'above'], ans:1}
+];
+
+// ====== UTIL ======
+const $ = s => document.querySelector(s);
+function shuffle(arr){ for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; }
+function deepClone(x){ return JSON.parse(JSON.stringify(x)); }
+function fmtTime(d){ return d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
+function fmtDate(d){ return d.toLocaleDateString(); }
+
+// ====== STATE ======
+let player = '';
+let seq = [];
+let idx = 0;
+let score = 0;
+let answered = [];
+
+function startGame(){
+  player = ($('#playerName').value || 'นักเรียน').trim();
+  document.getElementById('footerGame').textContent = `กำลังเล่น: ${player}`;
+
+  const base = deepClone(QUESTIONS);
+  const order = shuffle([...Array(base.length).keys()]);
+  seq = order.map(i => {
+    const q = base[i];
+    const opts = q.opts.map((t, i) => ({t, i}));
+    shuffle(opts);
+    const newOpts = opts.map(o => o.t);
+    const newAns = opts.findIndex(o => o.i === q.ans);
+    return {topic:q.topic, q:q.q, opts:newOpts, ans:newAns};
+  });
+
+  idx = 0; score = 0; answered = new Array(seq.length).fill(false);
+
+  document.getElementById('start').classList.add('hidden');
+  document.getElementById('review').classList.add('hidden');
+  document.getElementById('summary').classList.add('hidden');
+  document.getElementById('game').classList.remove('hidden');
+  renderQ();
+}
+
+function renderQ(){
+  const q = seq[idx];
+  document.getElementById('topicPill').textContent = q.topic;
+  document.getElementById('qtext').textContent = `${idx+1}. ${q.q}`;
+  document.getElementById('done').textContent = answered.filter(x=>x).length;
+  document.getElementById('total').textContent = seq.length;
+  document.getElementById('score').textContent = score;
+  document.getElementById('bar').style.width = (100*answered.filter(x=>x).length/seq.length).toFixed(1) + '%';
+
+  const olist = document.getElementById('olist');
+  olist.innerHTML = '';
+  ['A','B','C','D'].forEach((letter, k) => {
+    const div = document.createElement('div');
+    div.className = 'opt';
+    div.dataset.index = k;
+    div.innerHTML = `<b>${letter}.</b> ${q.opts[k]}`;
+    div.addEventListener('click', onChoose);
+    olist.appendChild(div);
+  });
+  document.getElementById('btnNext').classList.add('hidden');
+}
+
+function onChoose(e){
+  const choice = Number(e.currentTarget.dataset.index);
+  const q = seq[idx];
+
+  Array.from(document.querySelectorAll('.opt')).forEach(el => el.classList.add('disabled'));
+
+  if(choice === q.ans){
+    e.currentTarget.classList.add('correct');
+    score++;
+  }else{
+    e.currentTarget.classList.add('wrong');
+    const correctEl = document.querySelector(`.opt[data-index="${q.ans}"]`);
+    if(correctEl){ correctEl.classList.add('correct'); }
+  }
+
+  if(!answered[idx]){
+    answered[idx] = true;
+    document.getElementById('done').textContent = answered.filter(x=>x).length;
+    document.getElementById('score').textContent = score;
+    document.getElementById('bar').style.width = (100*answered.filter(x=>x).length/seq.length).toFixed(1) + '%';
+  }
+
+  const allDone = answered.every(x=>x);
+  if(allDone){
+    setTimeout(()=>finishGame(), 400);
+  }else{
+    document.getElementById('btnNext').classList.remove('hidden');
+  }
+}
+
+function nextQ(){
+  for(let k=1;k<=seq.length;k++){
+    const ni = (idx + k) % seq.length;
+    if(!answered[ni]){ idx = ni; break; }
+  }
+  renderQ();
+}
+
+function finishGame(){
+  document.getElementById('game').classList.add('hidden');
+  document.getElementById('summary').classList.remove('hidden');
+
+  document.getElementById('playerLine').textContent = `ผู้เล่น: ${player}`;
+  document.getElementById('finalScore').textContent = score;
+  document.getElementById('finalTotal').textContent = seq.length;
+  const pass = (score >= PASS_SCORE);
+  const pill = document.getElementById('passStatus');
+  pill.textContent = pass ? 'ผ่าน' : 'ยังไม่ผ่าน';
+  pill.style.background = pass ? '#ecfdf5' : '#fef2f2';
+  pill.style.color = pass ? '#065f46' : '#7f1d1d';
+
+  const key = STORAGE_PREFIX + player;
+  const now = new Date();
+  const rec = {score, total:seq.length, pass, ts: now.toISOString()};
+  const hist = JSON.parse(localStorage.getItem(key) || '[]');
+  hist.push(rec);
+  localStorage.setItem(key, JSON.stringify(hist));
+
+  document.getElementById('statName').textContent = player;
+  const tbody = document.getElementById('historyBody');
+  tbody.innerHTML = '';
+  const last3 = hist.slice(-3);
+  last3.forEach((r, i) => {
+    const d = new Date(r.ts);
+    const tr = document.createElement('tr');
+    const roundNo = hist.length - last3.length + (i+1);
+    tr.innerHTML = `<td>${roundNo}</td><td>${fmtDate(d)}</td><td>${fmtTime(d)}</td><td>${r.score}/${r.total}</td><td>${r.pass ? 'ผ่าน' : 'ไม่ผ่าน'}</td>`;
+    tbody.appendChild(tr);
+  });
+  if(last3.length===0){
+    const tr = document.createElement('tr'); tr.innerHTML = `<td colspan="5" class="muted">ยังไม่มีข้อมูล</td>`; tbody.appendChild(tr);
+  }
+
+  const firstPassIdx = hist.findIndex(r => r.pass);
+  const attemptTxt = (firstPassIdx>=0)
+    ? `ผ่านครั้งแรกในรอบที่ <b>${firstPassIdx+1}</b> (จากทั้งหมด ${hist.length} รอบของชื่อนี้)`
+    : `ยังไม่ผ่าน ภายใน ${hist.length} รอบของชื่อนี้`;
+  document.getElementById('attemptSummary').innerHTML = attemptTxt;
+}
+
+document.getElementById('btnStart').addEventListener('click', startGame);
+document.getElementById('btnNext').addEventListener('click', nextQ);
+document.getElementById('btnPlayAgain').addEventListener('click', startGame);
+document.getElementById('btnBackStart').addEventListener('click', backToStart);
+document.getElementById('btnReview').addEventListener('click', showReview);
+document.getElementById('btnBackToStart').addEventListener('click', backToStart);
+document.getElementById('btnStartFromReview').addEventListener('click', startGame);
+</script>
+</body>
+</html>
